@@ -1,12 +1,14 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.config.DtoMapper;
+import com.example.demo.dto.ApiResponse;
 import com.example.demo.dto.CreateStudentDto;
 import com.example.demo.dto.UpdateStudentDto;
+import com.example.demo.dto.StudentDto;
 import com.example.demo.service.student.StudentService;
 import com.example.demo.domain.Student;
-import org.aspectj.asm.IModelFilter;
+import com.example.demo.utils.Utils;
+import org.apache.tomcat.util.http.ResponseUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +24,7 @@ public class StudentController {
 
 
     @Autowired
-    public StudentController(StudentService studentService, ModelMapper modelMapper) {
+    private StudentController(StudentService studentService, ModelMapper modelMapper) {
         this.studentService = studentService;
         this.modelMapper = modelMapper;
     }
@@ -33,8 +35,18 @@ public class StudentController {
         return studentService.getStudents();
     }
 
+    @GetMapping("/{studentId}")
+    public ApiResponse<StudentDto> getStudent(@PathVariable("studentId") Long studentId){
+
+        Student student = studentService.getStudentbyId(studentId);
+        StudentDto studentDto = new ModelMapper().map(student, StudentDto.class);
+
+
+        return Utils.wrapInApiResponse(studentDto);
+    }
+
     @PostMapping
-    public void addStudent(@RequestBody CreateStudentDto createStudentDto) {
+    private void addStudent(@RequestBody CreateStudentDto createStudentDto) {
         studentService.addStudent(createStudentDto);
 
 

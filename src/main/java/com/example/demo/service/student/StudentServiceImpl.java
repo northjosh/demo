@@ -1,5 +1,6 @@
 package com.example.demo.service.student;
 
+import com.example.demo.dto.ApiResponse;
 import com.example.demo.dto.CreateStudentDto;
 import com.example.demo.dto.UpdateStudentDto;
 import com.example.demo.domain.Student;
@@ -55,6 +56,14 @@ public class StudentServiceImpl implements StudentService {
        }
 
        studentRepository.deleteById(studentId);
+    }
+
+    @Override
+    public Student getStudentbyId(Long studentId) {
+
+        return studentRepository.findById(studentId).orElseThrow(() ->
+            new IllegalStateException("no student found")
+        );
     }
 
     @Override

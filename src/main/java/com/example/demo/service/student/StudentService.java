@@ -1,5 +1,6 @@
 package com.example.demo.service.student;
 
+import com.example.demo.dto.ApiResponse;
 import com.example.demo.dto.CreateStudentDto;
 import com.example.demo.dto.UpdateStudentDto;
 import com.example.demo.domain.Student;
@@ -14,7 +15,5 @@ public interface StudentService {
     void updateStudent(UpdateStudentDto updateStudentDto);
     void deleteStudent(Long studentId);
 
-
-
-
+    Student getStudentbyId(Long studentId);
 }
