@@ -13,7 +13,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "api/v1/student")
@@ -30,9 +32,24 @@ public class StudentController {
     }
 
 
-    @GetMapping
-    public List<Student> getStudents() {
-        return studentService.getStudents();
+    @GetMapping("/")
+    public ApiResponse<ArrayList<StudentDto>> getStudents() {
+
+        ArrayList<StudentDto> students = studentService.getStudents().stream().map(
+                student -> {
+                    StudentDto studentDto = new StudentDto();
+                    studentDto.setName(student.getName());
+                    studentDto.setEmail(student.getEmail());
+                    studentDto.setBirthday(student.getBirthday());
+                    studentDto.setAge(student.getAge());
+                    return studentDto;
+                }
+
+
+        ).collect(Collectors.toCollection(ArrayList::new));
+
+        return Utils.wrapInApiResponse(students);
+
     }
 
     @GetMapping("/{studentId}")

@@ -28,6 +28,9 @@ public class StudentDto implements Serializable {
     private LocalDate birthday;
 
     @NotBlank
+    private int age;
+
+    @NotBlank
     @Email
     private String email;
 }
