@@ -6,10 +6,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Getter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 
@@ -27,51 +29,36 @@ public class Student {
             generator = "student_sequence"
     )
     private Long id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private LocalDate birthday;
+
+    @NotBlank
     private String email;
 
-    @CreatedDate
+    private String placeOfBirth;
+
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
 
     @Transient
     private Integer age;
 
-//    public Student() {
-//    }
 
-//    public Student(Long id, String name, LocalDate birthday,String email) {
-//        this.id = id;
-//        this.name = name;
-//        this.birthday = birthday;
-//        this.email = email;
-//    }
-//
     public Student(String email, LocalDate birthday, String name) {
         this.email = email;
         this.birthday = birthday;
         this.name = name;
     }
 
-//    public Long getId() {
-//        return id;
-//    }
-
-//    public String getName() {
-//        return name;
-//    }
 
     public Integer getAge() {
         return Period.between(birthday, LocalDate.now()).getYears();
     }
 
-//    public LocalDate getBirthday() {
-//        return birthday;
-//    }
-
-//    public String getEmail() {
-//        return email;
-//    }
 
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -25,6 +26,9 @@ public class CreateStudentDto implements Serializable {
 
     @NotBlank
     private String email;
+
+    @NotBlank
+    private String placeOfBirth;
 
 
 

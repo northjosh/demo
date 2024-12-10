@@ -32,6 +32,8 @@ public class UpdateStudentDto implements Serializable {
     @Email
     private String email;
 
+    private String placeOfBirth;
+
 
 
 

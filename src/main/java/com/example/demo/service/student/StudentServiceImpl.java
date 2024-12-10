@@ -30,7 +30,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void addStudent(CreateStudentDto createStudentDto) {
+    public Student addStudent(CreateStudentDto createStudentDto) {
 
         Optional<Student> studentOptional =  studentRepository.findStudentByEmail(createStudentDto.getEmail());
         if (studentOptional.isPresent()) {
@@ -40,6 +40,7 @@ public class StudentServiceImpl implements StudentService {
         Student student = new Student();
         student.setName(createStudentDto.getName());
         student.setEmail(createStudentDto.getEmail());
+        student.setPlaceOfBirth(createStudentDto.getPlaceOfBirth());
         student.setBirthday(createStudentDto.getBirthday());
 
 
@@ -47,6 +48,8 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(student);
 
         System.out.println(createStudentDto);
+
+        return student;
     }
 
     @Override
@@ -54,7 +57,7 @@ public class StudentServiceImpl implements StudentService {
        boolean exists =  studentRepository.existsById(studentId);
 
        if (!exists) {
-           throw new IllegalStateException("Student with " + studentId + "not Found");
+           throw new IllegalStateException("Student with id " + studentId + " not found");
        }
 
        studentRepository.deleteById(studentId);
