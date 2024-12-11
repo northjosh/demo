@@ -1,6 +1,6 @@
 FROM openjdk:17-alpine
 
-MAINTAINER northjosh
+LABEL  maintainer=northjosh
 
 
 COPY target/demo-0.0.1-SNAPSHOT.jar ./app/
