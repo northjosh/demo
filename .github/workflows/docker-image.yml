@@ -23,7 +23,7 @@ jobs:
         settings-path: ${{ github.workspace }}
     - name: Maven Build
       run: |
-        mvn package
-    - uses: actions/checkout@v4
+        mvn clean package
+
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag student-demo:$(date +%s)
