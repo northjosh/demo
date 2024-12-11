@@ -43,8 +43,6 @@ public class StudentServiceImpl implements StudentService {
         student.setPlaceOfBirth(createStudentDto.getPlaceOfBirth());
         student.setBirthday(createStudentDto.getBirthday());
 
-
-
         studentRepository.save(student);
 
         System.out.println(createStudentDto);
@@ -67,7 +65,7 @@ public class StudentServiceImpl implements StudentService {
     public Student getStudentbyId(Long studentId) {
 
         return studentRepository.findById(studentId).orElseThrow(() ->
-            new IllegalStateException("no student found")
+            new IllegalStateException("No Student found")
         );
     }
 

@@ -121,7 +121,7 @@ class StudentServiceTest {
             fixture.getStudentbyId(234L);
        });
 
-       assertEquals("no student found", exception.getMessage());
+       assertEquals("No Student found", exception.getMessage());
     }
 
 //    @Test
